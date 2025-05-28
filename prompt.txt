@@ -110,13 +110,15 @@ I need this content organized and collated by [NUMBER], let me describe what tha
 
 I want the input text extracted or copied word-for-word to the output.  You can fix typos that you have a very high confidence of being typos, but other grammar stays as written.  If there is a double-negative, that was surely intentional, because when it comes to Rules, we absolutely don't use enough *words*.  asterisks and quotes and double quotes and caps and a ridiculous amount of periods are important, for example the sentence "Because even *if* that really happened to me *back then*, it’s like I SEE CLEARLY how THAT is not what is blocking me NOW" it is important to copy the asterisks and caps as written, because the importance is precise and is a subtlety often LOST in the Rules that bind us (which is somewhat the topic of the book, so, it's important.)  They are a part of the expression. 
  
-The intent on this  is that the result will be essentially the exact same total text, but collated differently by chunks of paragraphs, by conversational flow filtered to a topic.  Almost as if you were reading the whole doc, listening intently, and started recording the letters... and kept recording until you could tell the topic changed.  And then end that recording where the topic changed and label it with the [NUMBER].  Then start the next recording until there is no more file.   The input text could contain one or more topics.  There could be several paragraphs on topic 1, then several paragraphs on topic 5, then another paragraph on topic 1.  The expected result would be:
+The intent on this  is that the result will be essentially the exact same total text, but reorganized differently by conversational flow filtered to a topic.  Almost as if you were reading the whole doc, listening intently, and started recording the letters... and kept recording until you could tell the topic changed.  And then end that recording where the topic changed and label it with the [NUMBER].  Then start the next recording until there is no more file.   The input text could contain one or more topics.  There could be several paragraphs on topic 1 (for example, A, B, and C), then several paragraphs on topic 5 (D, and E), then another paragraph on topic 1 (F).  The expected result would be:
 [1]
-//Extracted Paragraphs that relate to topic 1
-//Last addtional paragraph on topic 1
+A
+B
+C
+F
 [5]
-//Extracted Paragraphs that relate to topic 5
-
+D
+E
 
 The end result is the doc with the same total content, but reorganized to append sections of same chapter topic together.  Like changing the sort order of the file. 
 I believe in you, you can do it.  I know you really enjoy summarizing and leaving out details, but in this case your mission is to do the opposite of that tendency.
