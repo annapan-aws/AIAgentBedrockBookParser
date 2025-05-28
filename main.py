@@ -98,28 +98,25 @@ for i, chunk in enumerate(chunks):
         )
 
         result = json.loads(response["body"].read())
-        completion = result.get("completion", "")
+        model_output = result.get("generation", "")
     except (ClientError, Exception) as e:
         print(f"ERROR: Can't invoke '{MODEL_ID}'. Reason: {e}.  {e.__traceback__}")
         exit(1)
-    print(result)
+    print(model_output)
 
-    # === CATEGORY OUTPUT PARSING ===
-    topic_blocks = re.split(r'\[\d+\]\s*\n+', completion)
-    for block in topic_blocks:
-        lines = block.strip().splitlines()
-        if not lines:
+# === CATEGORY OUTPUT PARSING ===
+    # Find all sections that start with [NUMBER]
+    section_pattern = r'\[(\d+)\]\s*\n+(.*?)(?=\[\d+\]|$)'
+    sections = re.findall(section_pattern, model_output, re.DOTALL)
+    
+    for number, content in sections:
+        if not content.strip():
             continue
-        topic_line = lines[0].strip()
-        topic = topic_line.replace(" ", "_").lower()
-        text = "\n".join(lines[1:]).strip()
-
-        if not topic or not text:
-            continue
-
-        topic_file = Path(OUTPUT_DIR) / f"{topic}.txt"
-        with open(topic_file, "a", encoding="utf-8") as f:
-            f.write(f"\n\n--- From chunk {i + 1} ---\n{text}\n")
-            print(text)
+            
+        # Create a file named after the number
+        section_file = Path(OUTPUT_DIR) / f"{number}.txt"
+        with open(section_file, "a", encoding="utf-8") as f:
+            f.write(f"\n\n--- From chunk {i + 1} ---\n{content.strip()}\n")
+            print(f"Section {number}: {content[:50]}...")
 
 print(f"\n✅ All {len(chunks)} chunks processed.\nCategorized text written to .txt files in `{OUTPUT_DIR}`")
